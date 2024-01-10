@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<project>
+
+	<!-- ______________________________ Application Data _____________________________ -->
+
+	<app title="Sunday Night Suicide': Community Build" file="SNS Community Build" packageName="com.snscommunity.game" package="com.snscommunity.game" main="Main" version="0.1.0" company="SNSCB" />
+	<app                                                                           preloader="flixel.system.FlxPreloader"                                                                          />
+
+	<!-- ______________________________ Window Setting's _____________________________ -->
+
+	<window width="1280" height="720"   fps=""   background="#000000" hardware="true"      vsync="false"      />
+	<window if="html5"   resizable="true" />
+	<window if="desktop" orientation="landscape" fullscreen="false"   resizable="true"     vsync="false"      />
+	<window if="mobile"  orientation="landscape" fullscreen="true"    width="0" height="0" resizable="false"  />
+	<window if="switch"  orientation="landscape" fullscreen="true"    width="0" height="0" resizable="true"   />
+
+	<!-- ______________________________ Set's _____________________________ -->
+
+	<set name="APP_ID"      value="0x0100f6c013bbc000"            />
+	<set name="SWF_VERSION" value="11.8"                          />
+	<set name="BUILD_DIR"   value="export/debug"   if="debug"     />
+	<set name="BUILD_DIR"   value="export/release" unless="debug" />
+	<set name="BUILD_DIR"   value="export/32bit"   if="32bits"    />
+
+	<!-- ______________________________ Classpath _____________________________ -->
+
+	<classpath name="src" />
+
+	<!-- ______________________________ Library's _____________________________ -->
+
+	<library name="videos"              preload="true" />
+
+	<!-- ______________________________ Define's _____________________________ -->
+	
+	<define name="PRELOAD_ALL"           unless="web"                         />
+	<define name="NO_PRELOAD_ALL"        unless="PRELOAD_ALL"                 />
+	<define name="VIDEOS_ALLOWED"        if="web || windows" unless="32bits"  />
+	<define name="CRASH_HANDLER"         if="desktop release"                 />
+	<define name="FIRST_VERSION"         if="desktop"                         />
+	<define name="MODS_ALLOWED"          if="desktop"                         />
+	<define name="LUA_ALLOWED"           if="desktop"                         />
+	<define name="CREATOR"               if="desktop"                         />
+	<define name="ACHIEVEMENTS_ALLOWED"                                       />
+	<define name="GAMEJOLT_ALLOWED"                                           />
+	<define name="hscriptPos"                                                 />
+
+	<!-- ______________________________ Asset's _____________________________ -->
+
+	<assets path="docs"                 rename='documents'      if="debug"/>
+	<assets path="flixel"               embed='false'                                            />
+	<assets path="assets/preload"       rename="assets"         exclude="*.ogg"     if="web"     />
+	<assets path="assets/preload"       rename="assets"         exclude="*.mp3"     unless="web" />
+	<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED"              />
+	<assets path="assets/songs"         library="songs"         exclude="*.ogg"     if="web"     />
+	<assets path="assets/songs"         library="songs"         exclude="*.mp3"     unless="web" />
+	<assets path="assets/shared"        library="shared"        exclude="*.ogg"     if="web"     />
+	<assets path="assets/shared"        library="shared"        exclude="*.mp3"     unless="web" />
+	<assets path="assets/stages"        library="stages"        exclude="*.ogg"     if="web"     />
+	<assets path="assets/stages"        library="stages"        exclude="*.mp3"     unless="web" />
+	<assets path="assets/fonts"         embed='true'                                             />
+	<assets path='content/readme.txt'   rename='notreadme.txt'                                   />
+
+	<!-- ______________________________ Section's _____________________________ -->
+
+	<section if="PRELOAD_ALL">
+		<library name="songs"         preload="true" />
+		<library name="shared"        preload="true" />
+		<library name="stages"        preload="true" />
+	</section>
+	
+	<section if="NO_PRELOAD_ALL">
+		<library name="songs"         preload="false" />
+		<library name="shared"        preload="false" />
+		<library name="stages"        preload="false" />
+	</section>
+
+	<section if="MODS_ALLOWED">
+		<assets path='mods_for_devs' rename='mods' embed='false'/>
+	</section>
+
+	<!-- ______________________________ HaxeLib's _____________________________ -->
+
+	<haxelib name="hxCodec"       if="VIDEOS_ALLOWED" />
+	<haxelib name="linc_luajit"   if="LUA_ALLOWED"    />
+	<haxelib name="discord_rpc"   if="desktop"        />
+	<haxelib name="faxe"          if='switch'         />
+	<haxelib name="thx.semver"    if="desktop"        />
+	<haxelib name="flixel-addons"                     />
+	<haxelib name="flixel-ui"                         />
+	<haxelib name="flixel"                            />
+	<haxelib name="hscript"                           />
+	<haxelib name="systools"                          />
+
+	<!-- ______________________________ HaxeDef's _____________________________ -->
+
+	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/>
+	<haxedef name="FLX_NO_TOUCH" if="FIRST_VERSION" />
+	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
+	<haxedef name="HXC_DEBUG_TRACE" if="debug" />
+	<haxedef name="FLX_NO_DEBUG" unless="debug" />
+	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
+	<haxedef name="HXCPP_CHECK_POINTER" if="CRASH_HANDLER" />
+	<haxedef name="HXCPP_STACK_LINE" if="CRASH_HANDLER" />
+
+	<!-- ______________________________ HaxeDev's _____________________________ -->
+
+	<haxedev set='webgl' />
+
+	<!-- ______________________________ NDll's _____________________________ -->
+
+	<ndll name="systools" haxelib="systools" />
+
+	<!-- ______________________________ Icon's _____________________________ -->
+
+	<icon path="content/icon16.png" size='16'/>
+	<icon path="content/icon32.png" size='32'/>
+	<icon path="content/icon64.png" size='64'/>
+	<icon path="content/iconOG.png" />
+
+</project>
